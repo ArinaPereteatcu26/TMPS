@@ -55,5 +55,26 @@ public class DataBase
     }
 }
 
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        // Create a new order
+//        Order newOrder = new Order { Id = 1, Amount = 250.00 };
+
+//        // Save order to the database
+//        DataBase db = new DataBase();
+//        db.SaveToDataBase(newOrder);
+
+//        // Process the payment with Binance
+//        IProcessPayment paymentProcessor = new BinancePaymentProcess();
+//        paymentProcessor.ProcessPayment(newOrder);
+
+//        // Load order from the database
+//        Order loadedOrder = db.LoadFromDataBase(1);
+//        Console.WriteLine("Loaded order #{0}, amount: {1}", loadedOrder.Id, loadedOrder.Amount);
+//    }
+//}
+
 
 
