@@ -1,10 +1,20 @@
-﻿namespace SOLIDPrinciples
+﻿using System;
+
+public class Order
 {
-    internal class Program
+    public int Id { get; set; }
+    public double Amount { get; set; }
+}
+
+public interface IProcessPayment
+{
+    void ProcessPayment(Order order);
+}
+
+public class CreditCardPaymentProcess : IProcessPayment
+{
+    public void ProcessPayment(Order order)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
+        Console.WriteLine("Processing payment");
     }
 }
