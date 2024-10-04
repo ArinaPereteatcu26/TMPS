@@ -32,5 +32,28 @@ public class BinancePaymentProcess : IProcessPayment
         Console.WriteLine("Processing Binance payment");
     }
 }
+public class BankTransferPaymentProcess : IProcessPayment
+{
+    public void ProcessPayment(Order order)
+    {
+        Console.WriteLine("Processing bank transfer");
+    }
+}
+
+
+public class DataBase
+{
+    public void SaveToDataBase(Order order)
+    {
+        Console.WriteLine("Saving order to database");
+    }
+
+    public Order LoadFromDataBase(int orderID)
+    {
+        Console.WriteLine("Loading order from database");
+        return new Order();
+    }
+}
+
 
 
