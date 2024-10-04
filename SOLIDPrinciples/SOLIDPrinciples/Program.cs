@@ -18,3 +18,19 @@ public class CreditCardPaymentProcess : IProcessPayment
         Console.WriteLine("Processing payment");
     }
 }
+public class PayPalPaymentProcess : IProcessPayment
+{
+    public void ProcessPayment(Order order)
+    {
+        Console.WriteLine("Processing Paypal payment");
+    }
+}
+public class BinancePaymentProcess : IProcessPayment
+{
+    public void ProcessPayment(Order order)
+    {
+        Console.WriteLine("Processing Binance payment");
+    }
+}
+
+
