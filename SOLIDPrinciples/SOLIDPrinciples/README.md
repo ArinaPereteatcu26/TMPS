@@ -73,5 +73,5 @@ public class DataBase
 The DataBase class gives methods for saving an order and retrieving an order. Using SRP, the class is responsible for handling order storage and retrieval.
 
 ## Conclusion
-
+In conclusion, this project's effective application of SRP and OCP shows how these SOLID principles support the development of adaptable, testable, and maintainable software systems. Building scalable apps that can adjust to changing needs with little to no changes to the current codebase requires an understanding of these core concepts.
 
