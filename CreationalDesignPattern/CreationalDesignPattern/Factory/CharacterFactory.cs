@@ -10,7 +10,7 @@ namespace CreationalDesignPattern.Factory
             {
                 case "Warrior":
                     return new Warrior();
-                case "Mage":
+                case "Wizard":
                     return new Wizard();
                 case "Archer":
                     return new Archer();
