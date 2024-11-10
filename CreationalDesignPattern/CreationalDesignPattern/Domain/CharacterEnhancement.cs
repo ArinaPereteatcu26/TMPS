@@ -15,13 +15,6 @@ namespace CreationalDesignPattern.Domain
         {
             _character = character;
         }
-
-     
-        public override void PerformAction()
-        {
-            _character.PerformAction();
-        }
-
       
         public override void Attack()
         {
@@ -31,34 +24,33 @@ namespace CreationalDesignPattern.Domain
 
     public class ArmorEnhancement : CharacterEnhancement
     {
-        public ArmorEnhancement(Character character) : base(character) { }
+        public int ArmorValue { get; private set; } = 50;
 
-        public override void PerformAction()
+        public ArmorEnhancement(Character character) : base(character) 
         {
-            Console.WriteLine($"{_character.Name} is equipped with armor.");
-            base.PerformAction();
+            Name = $"Armored {character.Name}";
         }
+
 
         public override void Attack()
         {
-            Console.WriteLine($"{_character.Name} attacks with extra defense from the armor.");
+            Console.WriteLine($"[Protected by {ArmorValue} armor]");
             base.Attack();
         }
     }
 
     public class WeaponEnhancement : CharacterEnhancement
     {
-        public WeaponEnhancement(Character character) : base(character) { }
+        public int BonusDamage { get; private set; } = 25;
 
-        public override void PerformAction()
+        public WeaponEnhancement(Character character) : base(character) 
         {
-            Console.WriteLine($"{_character.Name} is wielding a powerful weapon.");
-            base.PerformAction();
+            Name = $"Enhanced {character.Name}";
         }
 
         public override void Attack()
         {
-            Console.WriteLine($"{_character.Name} strikes with enhanced power from the weapon.");
+            Console.WriteLine($"[Deals {BonusDamage} bonus damage]");
             base.Attack();
         }
     }

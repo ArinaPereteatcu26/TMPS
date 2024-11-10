@@ -3,6 +3,7 @@ using CreationalDesignPattern.Domain;
 using CreationalDesignPattern.Factory;
 using CreationalDesignPattern.Pool;
 using GameCharacterCreation.client;
+using CreationalDesignPattern.Devices;
 
 namespace GameCharacterCreation
 {
@@ -12,23 +13,32 @@ namespace GameCharacterCreation
         {
             Console.WriteLine("Welcome to the Character Creation System!");
 
-            // Initialize interaction service for player
+           
             PlayerInteraction playerInteraction = new PlayerInteraction();
-
-            // Get the singleton instance of CharacterCreationService
             CharacterCreationService creationService = CharacterCreationService.Instance;
-
-            // Create a pool for reusing characters
             CharacterPool characterPool = new CharacterPool();
+            CharacterCustomizer characterCustomizer = new CharacterCustomizer(creationService);
 
-            // Ask the player to choose a character type
             string characterType = playerInteraction.GetCharacterChoice();
 
-            // Create or reuse the character based on player choice
-            Character character = characterPool.GetCharacter(characterType);
+            Console.WriteLine("Do you want to add armor to your character? (yes/no)");
+            bool addArmor = Console.ReadLine().ToLower() == "yes";
+
+            Console.WriteLine("Do you want to add a weapon to your character? (yes/no)");
+            bool addWeapon = Console.ReadLine().ToLower() == "yes";
+
+            Character character = characterCustomizer.ConfigureCharacter(characterType, addArmor, addWeapon);
             playerInteraction.DisplayCharacterAction(character);
 
-            // Return the character to the pool (optional step to show pooling)
+            characterPool.GetCharacter(characterType);
+
+            Console.WriteLine("\nTesting the joystick input device...");
+            Joystick joystick = new Joystick();
+            JoystickAdapter joystickAdapter = new JoystickAdapter(joystick);
+            joystickAdapter.Move("Up");
+            joystickAdapter.PressButton("A");
+
+
             Console.WriteLine("\nReturning character to the pool...");
             characterPool.ReturnCharacter(character);
             playerInteraction.NotifyReturnCharacter(character);
