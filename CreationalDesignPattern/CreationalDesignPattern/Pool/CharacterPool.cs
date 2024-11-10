@@ -11,16 +11,16 @@ namespace CreationalDesignPattern.Pool
 
         public Character GetCharacter(string type)
         {
-            // Check if there is an available character in the pool
+         
             Character character = availableCharacters.FirstOrDefault(c => c.GetType().Name == type);
 
-            if (character == null) // If not, create a new one
+            if (character == null) 
             {
                 character = CharacterCreationService.Instance.CreateCharacter(type);
                 availableCharacters.Add(character);
             }
 
-            // Move character from available to in-use
+        
             availableCharacters.Remove(character);
             inUseCharacters.Add(character);
 
@@ -29,7 +29,7 @@ namespace CreationalDesignPattern.Pool
 
         public void ReturnCharacter(Character character)
         {
-            // Return character from in-use back to available
+          
             inUseCharacters.Remove(character);
             availableCharacters.Add(character);
         }
