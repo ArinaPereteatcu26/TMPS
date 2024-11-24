@@ -1,4 +1,5 @@
-﻿using CreationalDesignPattern.Factory;
+﻿using CreationalDesignPattern.Domain.Combat;
+using CreationalDesignPattern.Factory;
 using CreationalDesignPattern.Pool;
 using GameCharacterCreation.client;
 using System;
@@ -14,6 +15,7 @@ namespace CreationalDesignPattern.Domain
         private readonly CharacterCreationService _creationService;
         private readonly CharacterPool _characterPool;
         private readonly PlayerInteraction _playerInteraction;
+        private object combatStrategy;
 
         public CharacterCustomizer(CharacterCreationService creationService)
         {
@@ -26,7 +28,7 @@ namespace CreationalDesignPattern.Domain
             return _characterPool.GetCharacter(type);
         }
 
-        public Character CreateCustomCharacter(string type,bool addSkill)
+        public Character CreateCustomCharacter(string type, bool addSkill, ICombatStrategy combatStrategy = null)
         {
             Character character = _characterPool.GetCharacter(type);
 
@@ -35,12 +37,17 @@ namespace CreationalDesignPattern.Domain
                 character = new SkillEnhancement(character);
             }
 
-            else
+            if (combatStrategy != null)
             {
-                return character;
+                character.SetCombatStrategy(combatStrategy);
             }
-
             return character;
+        }
+
+        public void ChangeCombatStrategy(Character character, ICombatStrategy newStrategy)
+        {
+            character.SetCombatStrategy(newStrategy);
         }
     }
 }
+

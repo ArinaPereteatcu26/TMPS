@@ -4,6 +4,7 @@ using CreationalDesignPattern.Factory;
 using CreationalDesignPattern.Pool;
 using GameCharacterCreation.client;
 using CreationalDesignPattern.Devices;
+using CreationalDesignPattern.Domain.Combat;
 
 namespace GameCharacterCreation
 {
@@ -24,8 +25,10 @@ namespace GameCharacterCreation
             Console.WriteLine("\n=== Character Creation ===");
             string characterType = playerInteraction.GetCharacterChoice();
 
-            Console.WriteLine("Do you want to add skill to your character? (yes/no)");
-            bool addASkill = Console.ReadLine().ToLower() == "yes";
+            bool addSkill = playerInteraction.GetYesNoChoice("Do you want to add skill to your character?");
+
+            Console.WriteLine("\n=== Combat Style Selection ===");
+            ICombatStrategy combatStrategy = playerInteraction.GetCombatStrategyChoice();
 
 
             //Console.WriteLine("Do you want to add armor to your character? (yes/no)");
@@ -34,11 +37,21 @@ namespace GameCharacterCreation
             //Console.WriteLine("Do you want to add a weapon to your character? (yes/no)");
             //bool addWeapon = Console.ReadLine().ToLower() == "yes";
 
-            Character character = characterCustomizer.CreateCustomCharacter(characterType, addSkill);
-            Console.WriteLine($"\nCreated character: {character.Name}");
+            Character character = characterCustomizer.CreateCustomCharacter(characterType, addSkill, combatStrategy);
+            Console.WriteLine($"\nCreated character: {character.GetType().Name}");
 
-            Console.WriteLine("\n=== Character Action ===");
+
+            Console.WriteLine("\n=== Initial Character Action ===");
             playerInteraction.DisplayCharacterAction(character);
+
+            Console.WriteLine("\n=== Combat Style Switch ===");
+            if (playerInteraction.GetYesNoChoice("Would you like to switch combat style?"))
+            {
+                ICombatStrategy newStrategy = playerInteraction.GetCombatStrategyChoice();
+                characterCustomizer.ChangeCombatStrategy(character, newStrategy);
+                Console.WriteLine("\n=== New Combat Style Demo ===");
+                playerInteraction.DisplayCharacterAction(character);
+            }
 
 
             //Console.WriteLine("\n=== Input Device Testing ===");
@@ -61,7 +74,6 @@ namespace GameCharacterCreation
 
             Console.WriteLine("\n=== Character Pool Management ===");
             Console.WriteLine("Creating additional characters from pool...");
-
             Character basicCharacter = characterCustomizer.CreateBasicCharacter(characterType);
             Console.WriteLine($"Basic character created from pool: {basicCharacter.GetType().Name}");
             playerInteraction.DisplayCharacterAction(basicCharacter);
@@ -69,7 +81,6 @@ namespace GameCharacterCreation
             Console.WriteLine("\nReturning characters to pool...");
             characterPool.ReturnCharacter(character);
             playerInteraction.NotifyReturnCharacter(character);
-
             characterPool.ReturnCharacter(basicCharacter);
             playerInteraction.NotifyReturnCharacter(basicCharacter);
 
