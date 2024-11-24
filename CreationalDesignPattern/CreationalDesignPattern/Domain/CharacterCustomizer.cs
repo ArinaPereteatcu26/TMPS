@@ -26,18 +26,18 @@ namespace CreationalDesignPattern.Domain
             return _characterPool.GetCharacter(type);
         }
 
-        public Character CreateCustomCharacter(string type, bool addArmor, bool addWeapon)
+        public Character CreateCustomCharacter(string type,bool addSkill)
         {
             Character character = _characterPool.GetCharacter(type);
 
-            if (addArmor)
+            if (addSkill)
             {
-                character = new ArmorEnhancement(character);
+                character = new SkillEnhancement(character);
             }
 
-            if (addWeapon)
+            else
             {
-                character = new WeaponEnhancement(character);
+                return character;
             }
 
             return character;

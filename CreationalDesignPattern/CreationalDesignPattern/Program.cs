@@ -9,6 +9,8 @@ namespace GameCharacterCreation
 {
     class Program
     {
+        private static bool addSkill;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Character Creation System!");
@@ -22,13 +24,17 @@ namespace GameCharacterCreation
             Console.WriteLine("\n=== Character Creation ===");
             string characterType = playerInteraction.GetCharacterChoice();
 
-            Console.WriteLine("Do you want to add armor to your character? (yes/no)");
-            bool addArmor = Console.ReadLine().ToLower() == "yes";
+            Console.WriteLine("Do you want to add skill to your character? (yes/no)");
+            bool addASkill = Console.ReadLine().ToLower() == "yes";
 
-            Console.WriteLine("Do you want to add a weapon to your character? (yes/no)");
-            bool addWeapon = Console.ReadLine().ToLower() == "yes";
 
-            Character character = characterCustomizer.CreateCustomCharacter(characterType, addArmor, addWeapon);
+            //Console.WriteLine("Do you want to add armor to your character? (yes/no)");
+            //bool addArmor = Console.ReadLine().ToLower() == "yes";
+
+            //Console.WriteLine("Do you want to add a weapon to your character? (yes/no)");
+            //bool addWeapon = Console.ReadLine().ToLower() == "yes";
+
+            Character character = characterCustomizer.CreateCustomCharacter(characterType, addSkill);
             Console.WriteLine($"\nCreated character: {character.Name}");
 
             Console.WriteLine("\n=== Character Action ===");

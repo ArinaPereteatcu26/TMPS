@@ -1,12 +1,4 @@
-﻿using CreationalDesignPattern.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace CreationalDesignPattern.Domain
+﻿namespace CreationalDesignPattern.Domain
 {
     public abstract class CharacterEnhancement : Character
     {
@@ -15,43 +7,29 @@ namespace CreationalDesignPattern.Domain
         {
             _character = character;
         }
-      
+
         public override void Attack()
         {
             _character.Attack();
         }
     }
 
-    public class ArmorEnhancement : CharacterEnhancement
+    public class SkillEnhancement : CharacterEnhancement
     {
-        public int ArmorValue { get; private set; } = 50;
+        public string Name { get; private set; }
+        public string Skill { get; set; }
 
-        public ArmorEnhancement(Character character) : base(character) 
+        public SkillEnhancement(Character character) : base(character)
         {
-            Name = $"Armored {character.Name}";
-        }
 
-
-        public override void Attack()
-        {
-            Console.WriteLine($"[Protected by {ArmorValue} armor]");
-            base.Attack();
-        }
-    }
-
-    public class WeaponEnhancement : CharacterEnhancement
-    {
-        public int BonusDamage { get; private set; } = 25;
-
-        public WeaponEnhancement(Character character) : base(character) 
-        {
-            Name = $"Enhanced {character.Name}";
+            Name = $"Skill has been added to {character.Name}";
         }
 
         public override void Attack()
         {
-            Console.WriteLine($"[Deals {BonusDamage} bonus damage]");
+            Console.WriteLine($"Has new skill {Skill}");
             base.Attack();
         }
     }
+
 }

@@ -1,11 +1,4 @@
-﻿using CreationalDesignPattern.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CreationalDesignPattern.Devices
+﻿namespace CreationalDesignPattern.Devices
 {
     public interface InputDevice
     {
